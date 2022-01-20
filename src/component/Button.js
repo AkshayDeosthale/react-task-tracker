@@ -1,12 +1,8 @@
-const Button = ({ text, color }) => {
-  const onClick = () => {
-    console.log("This is clicked");
-  };
-
+const Button = ({ text, color, onClick }) => {
   return (
     <button
-      onClick={onClick}
       className="btn"
+      onClick={onClick}
       style={{ backgroundColor: color }}
     >
       {text}

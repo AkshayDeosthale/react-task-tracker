@@ -1,14 +1,12 @@
 import Button from "./Button";
 
-const Header = () => {
+const Header = ({ onAdd }) => {
   return (
     <header className="header">
       <h2>I am in header component</h2>
-      <Button color="green" text="hello" />
+      <Button color="green" text="Add" onClick={onAdd} />
     </header>
   );
 };
-
-Header.defaultProp = { name: "Add your content here" };
 
 export default Header;
