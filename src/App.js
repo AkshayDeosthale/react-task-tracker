@@ -55,7 +55,10 @@ function App() {
 
   return (
     <div className="container">
-      <Header onAdd={() => setShowAddTask(!showAddTask)} />
+      <Header
+        onAdd={() => setShowAddTask(!showAddTask)}
+        showAddTask={showAddTask}
+      />
 
       {showAddTask && <Addtask onAdd={addTask} />}
       {tasks.length > 0 ? (
