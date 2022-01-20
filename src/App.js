@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
+
 import Header from "./component/Header";
 import Tasks from "./component/Tasks";
 import Addtask from "./component/Addtask";
+import Footer from "./component/Footer";
+import About from "./component/About";
 
 function App() {
   // to hide or unhide the form with add button
   const [showAddTask, setShowAddTask] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
 
   //to set the tasks
   const [tasks, setTasks] = useState([]);
@@ -21,29 +25,52 @@ function App() {
 
   //fetch tasks
   const fetchTasks = async () => {
-    const response = await fetch("http://localhost:5000/tasks");
+    const response = await fetch("http://localhost:3001/tasks");
+    const data = await response.json();
+    return data;
+  };
+
+  //fetch task
+  const fetchTask = async (id) => {
+    const response = await fetch(`http://localhost:3001/tasks/${id}`);
     const data = await response.json();
     return data;
   };
 
   //Add task
-  const addTask = (task) => {
-    const id = Math.floor(Math.random() * 10000) + 1;
+  const addTask = async (task) => {
+    const res = await fetch("http://localhost:3001/tasks", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(task),
+    });
+    const data = await res.json();
 
-    const newTask = { id, ...task };
-    setTasks([...tasks, newTask]);
+    setTasks([...tasks, data]);
   };
 
   //Delete task
-  const deleteTask = (id) => {
+  const deleteTask = async (id) => {
+    await fetch(`http://localhost:3001/tasks/${id}`, { method: "DELETE" });
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
   //Toggle reminder
-  const toggleReminder = (id) => {
+  const toggleReminder = async (id) => {
+    const taskToToggle = await fetchTask(id);
+    const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
+
+    const res = await fetch(`http://localhost:3001/tasks/${id}`, {
+      method: "PUT",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(updTask),
+    });
+
+    const data = await res.json();
+
     setTasks(
       tasks.map((task) =>
-        task.id === id ? { ...task, reminder: !task.reminder } : task
+        task.id === id ? { ...task, reminder: data.reminder } : task
       )
     );
   };
@@ -61,6 +88,11 @@ function App() {
       ) : (
         "No task available"
       )}
+
+      {/* <Route exact path="/about" component={About} /> */}
+      {showAbout && <About />}
+
+      <Footer setShowAbout={setShowAbout} />
     </div>
   );
 }

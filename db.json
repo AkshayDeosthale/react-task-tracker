@@ -1,24 +1,22 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "text": "Doctors Appointment",
-      "day": "6th May at 1:45 PM"
+      "text": "adadw",
+      "day": "adwadawd",
+      "reminder": true,
+      "id": 1
     },
     {
-      "id": 2,
-      "text": "Doctors Appointment 2",
-      "day": "6th June at 1:45 PM"
+      "text": "awdawda",
+      "day": "adadwadawd",
+      "reminder": true,
+      "id": 2
     },
     {
-      "id": 3,
-      "text": "Doctors Appointment 3",
-      "day": "6th July at 1:45 PM"
-    },
-    {
-      "id": 4,
-      "text": "Doctors Appointment 4",
-      "day": "6th August at 1:45 PM"
+      "text": "gregerge",
+      "day": "wfergredg",
+      "reminder": true,
+      "id": 3
     }
   ]
 }
