@@ -1,5 +1,6 @@
 import { icons } from "react-icons";
 import { FaTimes } from "react-icons/fa";
+import React from "react";
 
 const Task = ({ task, onDelete, onToggle }) => {
   return (
